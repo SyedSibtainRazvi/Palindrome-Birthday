@@ -56,6 +56,7 @@ h2 {
     justify-content: center;
     color: #FF7F11;
     font-size: 2rem;
+    padding: 0.8rem;
 }
 
 .hero {
@@ -115,7 +116,7 @@ h2 {
 
 @media (max-width: 726px) {
     .hero {
-        max-width: 70vw;
+        max-width: 80vw;
     }
 
     #birthday-input {
