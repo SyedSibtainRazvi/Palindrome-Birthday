@@ -5,24 +5,21 @@
 
   // Function to Reverse a String
 
-  function String(str) {
-      var listOfChar = str.split("");
-      var reverseListOfChar = listOfChar.reverse();
-      var reverseStr = reverseListOfChar.join("");
-      return reverseStr;
-  };
+  function reverseStr(str) {
+      var charList = str.split("");
+      var reverse = charList.reverse();
+      reverse = reverse.join("");
+      return reverse;
+  }
 
-  // console.log(String("Hello"));
 
   // Function to Check for Palindrome
 
   function checkPalindrome(str) {
-      var reverseStr = String(str)
-      return (str === reverseStr)
-
+      var reverse = reverseStr(str)
+      return str === reverse
   };
 
-  // console.log(checkPalindrome("racecar"));
   // console.log(checkPalindrome("hello"));
 
   // Convert Data into String
@@ -68,12 +65,9 @@
 
 
   function checkPalindromeForAllFormats(date) {
-      var listOfPalindromes = getAllDateFormats(date);
-
+      var listOfFormats = getAllDateFormats(date);
       var palindromeList = [];
-
-      for (var i = 0; i < listOfPalindromes.length; i++) {
-
+      for (var i = 0; i < listOfFormats.length; i++) {
           var result = checkPalindrome(listOfPalindromes[i])
           palindromeList.push(result)
       }
@@ -102,7 +96,7 @@
       return false;
   }
 
-  var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  //   var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
   // Function to get next date
   function getNextDate(date) {
@@ -146,48 +140,63 @@
   // Function to get the next palindrome date
   function getNextPalindromeDate(date) {
 
-    var nextDate = getNextDate(date);
-    var ctr = 0;
-  
-    while (1) {
-      ctr++;
-    
-      var resultList = checkPalindrome(nextDate);
-  
-      for (let i = 0; i < resultList.length; i++) {
-        if (resultList[i]==true) {
-          return [ctr, nextDate];
-        }
+      var nextDate = getNextDate(date);
+      var ctr = 0;
+
+      while (1) {
+          ctr++;
+
+          var resultList = checkPalindrome(nextDate);
+
+          for (let i = 0; i < resultList.length; i++) {
+              if (resultList[i] == true) {
+                  return [ctr, nextDate];
+              }
+          }
+          nextDate = getNextDate(nextDate);
       }
-      nextDate = getNextDate(nextDate);
-    }
   }
+
+  var date = {
+      day: 11,
+      month: 12,
+      year: 2021
+  };
+
+  checkBtn.addEventListener("click", clickHandler)
 
   function clickHandler() {
-      var birthDate = birthdayInput.value;
 
-      if (birthdayInput !== '') {
-          var dateList = birthDate.split('-');
+      var inputDate = document.birthdayInput;
+      if (inputDate == "") {
 
+          output.innerHTML = "Please select date ❤";
+          output.style.color = "red";
+      } else {
+
+          inputDate = inputDate.split("-");
           var date = {
-
-              day: dateList[2],
-              month: dateList[1],
-              year: dateList[0],
+              day: Number(inputDate[2]),
+              month: Number(inputDate[1]),
+              year: Number(inputDate[0])
           }
 
-          var palindrome = checkPalindromeForAllFormats(date);
-          if (palindrome) {
+          var res1 = checkPalindrome(date);
+          var [ctr, nextdate] = (getNextPalindromeDate(date));
 
-              output.innerHTML = "Yayyy! You are a Palindrome Baby!🎉🎉";
-          } else {
-
-              var [cntr, nextDate] = getNextPalindromeDate(date);
-              output.innerHTML = `The next Palindrome Date is ${nextDate.day}-${nextDate.month}-${nextDate.year}, you missed it by ${cntr} days! `
+          for (var i = 0; i < res1.length; i++) {
+              if (res1[i] == true) {
+                  output.innerHTML = "Yayy!!!! This Date is a Palindrome  ❤"
+                  output.style.color = "#001d3d";
+                  break;
+              } else {
+                  output.innerHTML = `It is not a Plalindrome  . Next Palindrome date is ${nextdate.day}-${nextdate.month}-${nextdate.year} You missed it by ${ctr} days .`;
+                  output.style.color = "#001d3d";
+              }
           }
+
       }
-  }
 
-  if (checkBtn) {
-      checkBtn.addEventListener('click', clickHandler)
-  };
+
+
+  }
