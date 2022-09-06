@@ -17,11 +17,9 @@
   // Function to Check for Palindrome
 
   function checkPalindrome(str) {
-      var reverse = String(str)
-      if (str === reverse) {
-          return true
-      }
-      return false
+      var reverseStr = String(str)
+      return (str === reverseStr)
+
   };
 
   // console.log(checkPalindrome("racecar"));
@@ -50,12 +48,7 @@
 
       return dateString;
   };
-  // var date = {
-  //     day: 6,
-  //     month: 1,
-  //     year: 2020
-  // }
-  // console.log(convertDateToString(date));
+
 
   // Get all Date Formats
 
@@ -77,16 +70,15 @@
   function checkPalindromeForAllFormats(date) {
       var listOfPalindromes = getAllDateFormats(date);
 
-      var flag = false;
+      var palindromeList = [];
 
       for (var i = 0; i < listOfPalindromes.length; i++) {
-          if (checkPalindrome(listOfPalindromes[i])) {
-              flag = true;
-              break;
-          }
+
+          var result = checkPalindrome(listOfPalindromes[i])
+          palindromeList.push(result)
       }
-      return flag;
-  };
+      return palindromeList
+  }
 
   // var date = {
   //     day: 02,
@@ -120,28 +112,20 @@
 
       var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-      // Function to check for february
       if (month === 2) {
-
           if (isLeapYear(year)) {
-
               if (day > 29) {
-
                   day = 1;
-                  month++;
+                  month = 3;
               }
           } else {
-
               if (day > 28) {
-
                   day = 1;
-                  month++;
+                  month = 3;
               }
           }
       } else {
-
           if (day > daysInMonth[month - 1]) {
-
               day = 1;
               month++;
           }
@@ -156,23 +140,27 @@
           day: day,
           month: month,
           year: year
-      };
+      }
   }
 
   // Function to get the next palindrome date
   function getNextPalindromeDate(date) {
-      var cntr = 0;
-      var nextDate = getNextDate(date);
 
-      while (1) {
-          cntr++;
-          var isPalindrome = checkPalindromeForAllFormats(nextDate);
-          if (isPalindrome) {
-              break;
-          }
-          nextDate = getNextDate(nextDate);
+    var nextDate = getNextDate(date);
+    var ctr = 0;
+  
+    while (1) {
+      ctr++;
+    
+      var resultList = checkPalindrome(nextDate);
+  
+      for (let i = 0; i < resultList.length; i++) {
+        if (resultList[i]==true) {
+          return [ctr, nextDate];
+        }
       }
-      return [cntr, nextDate];
+      nextDate = getNextDate(nextDate);
+    }
   }
 
   function clickHandler() {
