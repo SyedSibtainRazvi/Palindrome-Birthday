@@ -49,7 +49,7 @@ header {
 
 h2 {
     margin: 2rem auto;
-    color: #FF7F11;
+    color: #Fc8181;
     font-size: 2rem;
     padding: 0.8rem;
 }
@@ -63,7 +63,7 @@ h2 {
 .birthday-input {
     outline: #000;
     padding: 0.6rem 1rem;
-    border: 2px solid #FF7F11;
+    border: 2px solid #Fc8181;
     border-radius: 0.6rem;
     font-size: 1rem;
     margin: 1rem;
@@ -72,16 +72,20 @@ h2 {
 }
 
 #check-btn {
-    background: #FF7F11;
+    background: #Fc8181;
     border: none;
-    color: #000;
-    padding: 0.7rem 1rem;
+    padding: 1rem 1rem;
     border-radius: 0.5rem;
     font-size: large;
     cursor: pointer;
-    outline: #000;
     margin: auto;
+    outline: black;
+    color: black;
     display: block;
+}
+
+#check-btn:hover{
+    background: #ff9e9e;
 }
 
 #output {
